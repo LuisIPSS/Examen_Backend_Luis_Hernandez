@@ -21,7 +21,10 @@ class VentasController extends Controller
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Ventas"))
-     *         ))
+     *         )),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function index(Request $request): JsonResponse
@@ -58,7 +61,12 @@ class VentasController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/Ventas")
      *         )),
-     *     @OA\Response(response=422, description="Errores de validación")
+     *     @OA\Response(response=422, description="Errores de validación",
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function store(Request $request): JsonResponse
@@ -92,7 +100,12 @@ class VentasController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/Ventas")
      *         )),
-     *     @OA\Response(response=404, description="Venta no encontrada")
+     *     @OA\Response(response=404, description="Venta no encontrada",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function show(Ventas $venta): JsonResponse
@@ -129,8 +142,15 @@ class VentasController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/Ventas")
      *         )),
-     *     @OA\Response(response=404, description="Venta no encontrada"),
-     *     @OA\Response(response=422, description="Errores de validación")
+     *     @OA\Response(response=404, description="Venta no encontrada",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=422, description="Errores de validación",
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function update(Request $request, Ventas $venta): JsonResponse
@@ -167,7 +187,12 @@ class VentasController extends Controller
      *                 @OA\Property(property="message", type="string", example="Venta eliminada correctamente")
      *             )
      *         )),
-     *     @OA\Response(response=404, description="Venta no encontrada")
+     *     @OA\Response(response=404, description="Venta no encontrada",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function destroy(Ventas $venta): JsonResponse

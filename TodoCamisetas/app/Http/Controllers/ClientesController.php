@@ -25,7 +25,10 @@ class ClientesController extends Controller
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Clientes"))
-     *         ))
+     *         )),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function index(): JsonResponse
@@ -54,7 +57,12 @@ class ClientesController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/Clientes")
      *         )),
-     *     @OA\Response(response=422, description="Errores de validación")
+     *     @OA\Response(response=422, description="Errores de validación",
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function store(Request $request): JsonResponse
@@ -102,7 +110,12 @@ class ClientesController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/Clientes")
      *         )),
-     *     @OA\Response(response=404, description="Cliente no encontrado")
+     *     @OA\Response(response=404, description="Cliente no encontrado",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function show(Clientes $cliente): JsonResponse
@@ -131,8 +144,15 @@ class ClientesController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/Clientes")
      *         )),
-     *     @OA\Response(response=404, description="Cliente no encontrado"),
-     *     @OA\Response(response=422, description="Errores de validación")
+     *     @OA\Response(response=404, description="Cliente no encontrado",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=422, description="Errores de validación",
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function update(Request $request, Clientes $cliente): JsonResponse
@@ -189,7 +209,12 @@ class ClientesController extends Controller
      *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="message", type="string", example="No se puede eliminar el cliente porque tiene ventas o camisetas asociadas.")
      *         )),
-     *     @OA\Response(response=404, description="Cliente no encontrado")
+     *     @OA\Response(response=404, description="Cliente no encontrado",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function destroy(Clientes $cliente): JsonResponse

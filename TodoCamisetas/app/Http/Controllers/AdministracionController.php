@@ -31,7 +31,12 @@ class AdministracionController extends Controller
      *                 @OA\Property(property="precio_final", type="integer", example=8500)
      *             )
      *         )),
-     *     @OA\Response(response=422, description="Errores de validación")
+     *     @OA\Response(response=422, description="Errores de validación",
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function calcularPrecioFinal(Request $request): JsonResponse
@@ -80,7 +85,12 @@ class AdministracionController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Camisetas"))
      *         )),
-     *     @OA\Response(response=404, description="Cliente no encontrado")
+     *     @OA\Response(response=404, description="Cliente no encontrado",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function camisetasPorCliente(Clientes $cliente): JsonResponse

@@ -22,7 +22,10 @@ class CamisetasController extends Controller
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Camisetas"))
-     *         ))
+     *         )),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function index(): JsonResponse
@@ -52,12 +55,11 @@ class CamisetasController extends Controller
      *             @OA\Property(property="data", ref="#/components/schemas/Camisetas")
      *         )),
      *     @OA\Response(response=422, description="Datos inválidos o SKU duplicado",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="success", type="boolean", example=false),
-     *             @OA\Property(property="message", type="string", example="The sku field is required."),
-     *             @OA\Property(property="errors", type="object")
-     *         ))
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function store(Request $request): JsonResponse
@@ -99,11 +101,11 @@ class CamisetasController extends Controller
      *             @OA\Property(property="data", ref="#/components/schemas/Camisetas")
      *         )),
      *     @OA\Response(response=404, description="Camiseta no encontrada",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="success", type="boolean", example=false),
-     *             @OA\Property(property="message", type="string", example="Recurso no encontrado")
-     *         ))
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function show(Camisetas $camiseta): JsonResponse
@@ -134,8 +136,15 @@ class CamisetasController extends Controller
      *                 @OA\Property(property="message", type="string", example="Camiseta actualizada correctamente")
      *             )
      *         )),
-     *     @OA\Response(response=404, description="Camiseta no encontrada"),
-     *     @OA\Response(response=422, description="Datos inválidos o SKU duplicado")
+     *     @OA\Response(response=404, description="Camiseta no encontrada",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=422, description="Datos inválidos o SKU duplicado",
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function update(Request $request, Camisetas $camiseta): JsonResponse
@@ -177,9 +186,18 @@ class CamisetasController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/Camisetas")
      *         )),
-     *     @OA\Response(response=404, description="Camiseta no encontrada"),
-     *     @OA\Response(response=409, description="No se puede eliminar la camiseta porque tiene registros asociados"),
-     *     @OA\Response(response=422, description="Errores de validación")
+     *     @OA\Response(response=404, description="Camiseta no encontrada",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=409, description="No se puede eliminar la camiseta porque tiene registros asociados",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=422, description="Errores de validación",
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function destroy(Camisetas $camiseta): JsonResponse

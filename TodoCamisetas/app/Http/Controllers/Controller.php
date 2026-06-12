@@ -10,6 +10,27 @@ use App\Traits\ApiResponse;
  *     title="TodoCamisetas API",
  *     description="API REST para la plataforma de camisetas TodoCamisetas. Permite gestionar camisetas, clientes, tallas y ventas."
  * )
+ * @OA\Response(
+ *     response="ErrorResponse",
+ *     description="Error de la operación",
+ *     @OA\JsonContent(
+ *         type="object",
+ *         required={"success","message"},
+ *         @OA\Property(property="success", type="boolean", example=false),
+ *         @OA\Property(property="message", type="string", example="Ha ocurrido un error inesperado.")
+ *     )
+ * )
+ * @OA\Response(
+ *     response="ValidationErrorResponse",
+ *     description="Error de validación",
+ *     @OA\JsonContent(
+ *         type="object",
+ *         required={"success","message","errors"},
+ *         @OA\Property(property="success", type="boolean", example=false),
+ *         @OA\Property(property="message", type="string", example="Los datos proporcionados no son válidos."),
+ *         @OA\Property(property="errors", type="object", example={"campo": {"El valor del campo es inválido."}})
+ *     )
+ * )
  * @OA\Server(
  *     url="http://localhost/api",
  *     description="Servidor de desarrollo local"

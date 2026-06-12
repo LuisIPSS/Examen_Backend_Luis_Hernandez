@@ -23,7 +23,10 @@ class CamisetaTallasController extends Controller
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/CamisetaTalla"))
-     *         ))
+     *         )),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function index(Request $request): JsonResponse
@@ -60,7 +63,12 @@ class CamisetaTallasController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/CamisetaTalla")
      *         )),
-     *     @OA\Response(response=422, description="Errores de validación")
+     *     @OA\Response(response=422, description="Errores de validación",
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function store(Request $request): JsonResponse
@@ -110,7 +118,12 @@ class CamisetaTallasController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/CamisetaTalla")
      *         )),
-     *     @OA\Response(response=404, description="Camiseta talla no encontrada")
+     *     @OA\Response(response=404, description="Camiseta talla no encontrada",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function show(Camiseta_tallas $camiseta_talla): JsonResponse
@@ -147,8 +160,15 @@ class CamisetaTallasController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="data", ref="#/components/schemas/CamisetaTalla")
      *         )),
-     *     @OA\Response(response=404, description="Camiseta talla no encontrada"),
-     *     @OA\Response(response=422, description="Errores de validación")
+     *     @OA\Response(response=404, description="Camiseta talla no encontrada",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=422, description="Errores de validación",
+     *         ref="#/components/responses/ValidationErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function update(Request $request, Camiseta_tallas $camiseta_talla): JsonResponse
@@ -203,8 +223,15 @@ class CamisetaTallasController extends Controller
      *                 @OA\Property(property="message", type="string", example="Camiseta talla eliminada correctamente")
      *             )
      *         )),
-     *     @OA\Response(response=404, description="Camiseta talla no encontrada"),
-     *     @OA\Response(response=409, description="No se puede eliminar la relación porque tiene registros asociados")
+     *     @OA\Response(response=404, description="Camiseta talla no encontrada",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=409, description="No se puede eliminar la relación porque tiene registros asociados",
+     *         ref="#/components/responses/ErrorResponse"
+     *     ),
+     *     @OA\Response(response=500, description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
+     *     )
      * )
      */
     public function destroy(Camiseta_tallas $camiseta_talla): JsonResponse

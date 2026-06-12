@@ -20,6 +20,11 @@ class HealthController extends Controller
      *             type="object",
      *             example={"status": "online", "service": "TodoCamisetas API", "version": "1.0.0", "timestamp": "2026-06-10T10:30:00+00:00"}
      *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error interno del servidor",
+     *         ref="#/components/responses/ErrorResponse"
      *     )
      * )
      */

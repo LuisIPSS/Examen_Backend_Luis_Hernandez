@@ -71,7 +71,10 @@
                         }
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -118,7 +121,10 @@
                         }
                     },
                     "404": {
-                        "description": "Cliente no encontrado"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -153,6 +159,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -194,7 +203,10 @@
                         }
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -237,7 +249,10 @@
                         }
                     },
                     "404": {
-                        "description": "Camiseta talla no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -288,10 +303,13 @@
                         }
                     },
                     "404": {
-                        "description": "Camiseta talla no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -339,10 +357,13 @@
                         }
                     },
                     "404": {
-                        "description": "Camiseta talla no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "409": {
-                        "description": "No se puede eliminar la relación porque tiene registros asociados"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -377,6 +398,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -418,27 +442,10 @@
                         }
                     },
                     "422": {
-                        "description": "Datos inválidos o SKU duplicado",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "The sku field is required."
-                                        },
-                                        "errors": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -481,24 +488,10 @@
                         }
                     },
                     "404": {
-                        "description": "Camiseta no encontrada",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Recurso no encontrado"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -555,10 +548,13 @@
                         }
                     },
                     "404": {
-                        "description": "Camiseta no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "422": {
-                        "description": "Datos inválidos o SKU duplicado"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -600,13 +596,16 @@
                         }
                     },
                     "404": {
-                        "description": "Camiseta no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "409": {
-                        "description": "No se puede eliminar la camiseta porque tiene registros asociados"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -641,6 +640,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -682,7 +684,10 @@
                         }
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -725,7 +730,10 @@
                         }
                     },
                     "404": {
-                        "description": "Cliente no encontrado"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -776,10 +784,13 @@
                         }
                     },
                     "404": {
-                        "description": "Cliente no encontrado"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -847,7 +858,10 @@
                         }
                     },
                     "404": {
-                        "description": "Cliente no encontrado"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -876,6 +890,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -910,6 +927,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -951,7 +971,10 @@
                         }
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -994,7 +1017,10 @@
                         }
                     },
                     "404": {
-                        "description": "Talla no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -1045,10 +1071,13 @@
                         }
                     },
                     "404": {
-                        "description": "Talla no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -1096,10 +1125,13 @@
                         }
                     },
                     "404": {
-                        "description": "Talla no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "409": {
-                        "description": "No se puede eliminar la talla porque tiene registros asociados"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -1134,6 +1166,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -1175,7 +1210,10 @@
                         }
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -1218,7 +1256,10 @@
                         }
                     },
                     "404": {
-                        "description": "Venta no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -1269,10 +1310,13 @@
                         }
                     },
                     "404": {
-                        "description": "Venta no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -1320,7 +1364,10 @@
                         }
                     },
                     "404": {
-                        "description": "Venta no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -1355,6 +1402,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -1396,7 +1446,10 @@
                         }
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -1439,7 +1492,10 @@
                         }
                     },
                     "404": {
-                        "description": "Venta detalle no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -1490,10 +1546,13 @@
                         }
                     },
                     "404": {
-                        "description": "Venta detalle no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
                     },
                     "422": {
-                        "description": "Errores de validación"
+                        "$ref": "#/components/responses/ValidationErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             },
@@ -1541,7 +1600,10 @@
                         }
                     },
                     "404": {
-                        "description": "Venta detalle no encontrada"
+                        "$ref": "#/components/responses/ErrorResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ErrorResponse"
                     }
                 }
             }
@@ -1958,6 +2020,65 @@
                     }
                 },
                 "type": "object"
+            }
+        },
+        "responses": {
+            "ErrorResponse": {
+                "description": "Error de la operación",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "success",
+                                "message"
+                            ],
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Ha ocurrido un error inesperado."
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "ValidationErrorResponse": {
+                "description": "Error de validación",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "success",
+                                "message",
+                                "errors"
+                            ],
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Los datos proporcionados no son válidos."
+                                },
+                                "errors": {
+                                    "type": "object",
+                                    "example": {
+                                        "campo": [
+                                            "El valor del campo es inválido."
+                                        ]
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
             }
         }
     },
