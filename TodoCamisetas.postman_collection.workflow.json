@@ -1,0 +1,353 @@
+{
+  "info": {
+    "_postman_id": "5f3179bc-8f91-4f57-a470-3ed2f7b8b7e1",
+    "name": "TodoCamisetas API - Flujo E2E",
+    "description": "Coleccion E2E con orden correcto de creacion y eliminacion para evitar errores por dependencias.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost/api" },
+    { "key": "flow_cliente_id", "value": "" },
+    { "key": "flow_rut", "value": "" },
+    { "key": "flow_camiseta_id", "value": "" },
+    { "key": "flow_sku", "value": "" },
+    { "key": "flow_talla_id", "value": "" },
+    { "key": "flow_camiseta_talla_id", "value": "" },
+    { "key": "flow_venta_id", "value": "" },
+    { "key": "flow_venta_detalle_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "01 - Crear Cliente",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 201', function () {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var json = pm.response.json();",
+              "pm.collectionVariables.set('flow_cliente_id', json.data.id);",
+              "pm.collectionVariables.set('flow_rut', json.data.rut);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "nombre_comercial", "value": "Cliente Flujo {{$timestamp}}", "type": "text" },
+            { "key": "rut", "value": "99.{{$timestamp}}-1", "type": "text" },
+            { "key": "direccion", "value": "Direccion Flujo", "type": "text" },
+            { "key": "categoria", "value": "Preferencial", "type": "text" },
+            { "key": "contacto", "value": "+56 9 1234 5678", "type": "text" },
+            { "key": "procentaje_oferta", "value": "10", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/clientes"
+      }
+    },
+    {
+      "name": "02 - Crear Camiseta",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 201', function () {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var json = pm.response.json();",
+              "pm.collectionVariables.set('flow_camiseta_id', json.data.id);",
+              "pm.collectionVariables.set('flow_sku', json.data.sku);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "titulo", "value": "Camiseta Flujo {{$timestamp}}", "type": "text" },
+            { "key": "club", "value": "Club Flujo", "type": "text" },
+            { "key": "pais", "value": "Chile", "type": "text" },
+            { "key": "tipo", "value": "Local", "type": "text" },
+            { "key": "color", "value": "Rojo", "type": "text" },
+            { "key": "precio", "value": "75000", "type": "text" },
+            { "key": "precio_oferta", "value": "70000", "type": "text" },
+            { "key": "detalles", "value": "Creada por flujo E2E", "type": "text" },
+            { "key": "sku", "value": "SKU-FLUJO-{{$timestamp}}", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/camisetas"
+      }
+    },
+    {
+      "name": "03 - Crear Talla",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 201', function () {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var json = pm.response.json();",
+              "pm.collectionVariables.set('flow_talla_id', json.data.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [{ "key": "talla", "value": "T-FLUJO-{{$timestamp}}", "type": "text" }]
+        },
+        "url": "{{base_url}}/tallas"
+      }
+    },
+    {
+      "name": "04 - Crear Camiseta-Talla",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 201', function () {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var json = pm.response.json();",
+              "pm.collectionVariables.set('flow_camiseta_talla_id', json.data.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "camiseta_id", "value": "{{flow_camiseta_id}}", "type": "text" },
+            { "key": "talla_id", "value": "{{flow_talla_id}}", "type": "text" },
+            { "key": "stock", "value": "10", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/camiseta-tallas"
+      }
+    },
+    {
+      "name": "05 - Crear Venta",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 201', function () {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var json = pm.response.json();",
+              "pm.collectionVariables.set('flow_venta_id', json.data.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "cliente_id", "value": "{{flow_cliente_id}}", "type": "text" },
+            { "key": "total", "value": "70000", "type": "text" },
+            { "key": "fecha", "value": "2026-06-12", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/ventas"
+      }
+    },
+    {
+      "name": "06 - Crear Venta-Detalle",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 201', function () {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var json = pm.response.json();",
+              "pm.collectionVariables.set('flow_venta_detalle_id', json.data.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "venta_id", "value": "{{flow_venta_id}}", "type": "text" },
+            { "key": "camiseta_talla_id", "value": "{{flow_camiseta_talla_id}}", "type": "text" },
+            { "key": "cantidad", "value": "1", "type": "text" },
+            { "key": "precio_unitario", "value": "70000", "type": "text" },
+            { "key": "precio_total", "value": "70000", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/ventas-detalles"
+      }
+    },
+    { "name": "07 - GET /clientes", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/clientes" } },
+    { "name": "08 - GET /clientes/{id}", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/clientes/{{flow_cliente_id}}" } },
+    {
+      "name": "09 - PUT /clientes/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "nombre_comercial", "value": "Cliente Flujo Editado", "type": "text" },
+            { "key": "rut", "value": "{{flow_rut}}", "type": "text" },
+            { "key": "direccion", "value": "Direccion Flujo Editada", "type": "text" },
+            { "key": "categoria", "value": "Preferencial", "type": "text" },
+            { "key": "contacto", "value": "+56 9 7777 6666", "type": "text" },
+            { "key": "procentaje_oferta", "value": "15", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/clientes/{{flow_cliente_id}}"
+      }
+    },
+    { "name": "10 - GET /camisetas", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/camisetas" } },
+    { "name": "11 - GET /camisetas/{id}", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/camisetas/{{flow_camiseta_id}}" } },
+    {
+      "name": "12 - PUT /camisetas/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "titulo", "value": "Camiseta Flujo Editada", "type": "text" },
+            { "key": "club", "value": "Club Flujo", "type": "text" },
+            { "key": "pais", "value": "Chile", "type": "text" },
+            { "key": "tipo", "value": "Visita", "type": "text" },
+            { "key": "color", "value": "Azul", "type": "text" },
+            { "key": "precio", "value": "76000", "type": "text" },
+            { "key": "precio_oferta", "value": "71000", "type": "text" },
+            { "key": "detalles", "value": "Editada por flujo E2E", "type": "text" },
+            { "key": "sku", "value": "{{flow_sku}}", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/camisetas/{{flow_camiseta_id}}"
+      }
+    },
+    { "name": "13 - GET /tallas", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/tallas" } },
+    { "name": "14 - GET /tallas/{id}", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/tallas/{{flow_talla_id}}" } },
+    {
+      "name": "15 - PUT /tallas/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [{ "key": "talla", "value": "T-FLUJO-EDIT-{{$timestamp}}", "type": "text" }]
+        },
+        "url": "{{base_url}}/tallas/{{flow_talla_id}}"
+      }
+    },
+    { "name": "16 - GET /camiseta-tallas", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/camiseta-tallas" } },
+    { "name": "17 - GET /camiseta-tallas/{id}", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/camiseta-tallas/{{flow_camiseta_talla_id}}" } },
+    {
+      "name": "18 - PUT /camiseta-tallas/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "camiseta_id", "value": "{{flow_camiseta_id}}", "type": "text" },
+            { "key": "talla_id", "value": "{{flow_talla_id}}", "type": "text" },
+            { "key": "stock", "value": "20", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/camiseta-tallas/{{flow_camiseta_talla_id}}"
+      }
+    },
+    { "name": "19 - GET /ventas", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/ventas" } },
+    { "name": "20 - GET /ventas/{id}", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/ventas/{{flow_venta_id}}" } },
+    {
+      "name": "21 - PUT /ventas/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "cliente_id", "value": "{{flow_cliente_id}}", "type": "text" },
+            { "key": "total", "value": "71000", "type": "text" },
+            { "key": "fecha", "value": "2026-06-13", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/ventas/{{flow_venta_id}}"
+      }
+    },
+    { "name": "22 - GET /ventas-detalles", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/ventas-detalles" } },
+    { "name": "23 - GET /ventas-detalles/{id}", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/ventas-detalles/{{flow_venta_detalle_id}}" } },
+    {
+      "name": "24 - PUT /ventas-detalles/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "venta_id", "value": "{{flow_venta_id}}", "type": "text" },
+            { "key": "camiseta_talla_id", "value": "{{flow_camiseta_talla_id}}", "type": "text" },
+            { "key": "cantidad", "value": "2", "type": "text" },
+            { "key": "precio_unitario", "value": "70000", "type": "text" },
+            { "key": "precio_total", "value": "140000", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/ventas-detalles/{{flow_venta_detalle_id}}"
+      }
+    },
+    {
+      "name": "25 - POST /clientes/calcularpreciofinal",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "camiseta_id", "value": "{{flow_camiseta_id}}", "type": "text" },
+            { "key": "cliente_id", "value": "{{flow_cliente_id}}", "type": "text" }
+          ]
+        },
+        "url": "{{base_url}}/clientes/calcularpreciofinal"
+      }
+    },
+    { "name": "26 - GET /clientes/{id}/camisetas", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/clientes/{{flow_cliente_id}}/camisetas" } },
+    { "name": "27 - Eliminar Venta-Detalle", "request": { "method": "DELETE", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/ventas-detalles/{{flow_venta_detalle_id}}" } },
+    { "name": "28 - Eliminar Venta", "request": { "method": "DELETE", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/ventas/{{flow_venta_id}}" } },
+    { "name": "29 - Eliminar Camiseta-Talla", "request": { "method": "DELETE", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/camiseta-tallas/{{flow_camiseta_talla_id}}" } },
+    { "name": "30 - Eliminar Camiseta", "request": { "method": "DELETE", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/camisetas/{{flow_camiseta_id}}" } },
+    { "name": "31 - Eliminar Talla", "request": { "method": "DELETE", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/tallas/{{flow_talla_id}}" } },
+    { "name": "32 - Eliminar Cliente", "request": { "method": "DELETE", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/clientes/{{flow_cliente_id}}" } }
+  ]
+}

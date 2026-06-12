@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('talla_id')->constrained('tallas')->cascadeOnDelete();
             $table->unsignedInteger('stock')->default(0);
             $table->timestamps();
+
             $table->unique(['camiseta_id', 'talla_id']);
         });
     }
@@ -29,3 +30,4 @@ return new class extends Migration
         Schema::dropIfExists('camiseta_tallas');
     }
 };
+

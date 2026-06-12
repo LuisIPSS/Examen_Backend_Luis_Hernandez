@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('camisetas', function (Blueprint $table) {
-            $table->dropColumn('tallas_disponibles');
+        Schema::create('ventas', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('cliente_id')->constrained('clientes')->restrictOnDelete();
+            $table->date('fecha');
+            $table->unsignedInteger('total');
+            $table->timestamps();
         });
     }
 
@@ -21,9 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('camisetas', function (Blueprint $table) {
-            $table->json('tallas_disponibles')->after('precio');
-        });
+        Schema::dropIfExists('ventas');
     }
 };
 

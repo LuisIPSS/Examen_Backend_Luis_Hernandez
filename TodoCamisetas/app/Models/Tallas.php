@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Tallas extends Model
 {
     use HasFactory;
@@ -13,10 +14,17 @@ class Tallas extends Model
         'talla',
     ];
 
-    public function camisetas()
+    public function camisetaTallas()
     {
-        return $this->belongsTo(Camisetas::class, 'camiseta_id');
+        return $this->hasMany(Camiseta_tallas::class, 'talla_id');
     }
 
+    public function camisetas()
+    {
+        return $this->belongsToMany(Camisetas::class, 'camiseta_tallas', 'talla_id', 'camiseta_id')
+            ->withPivot('stock')
+            ->withTimestamps();
+    }
 
 }
+

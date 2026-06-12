@@ -16,6 +16,7 @@ class Camisetas extends Model
         'tipo',
         'color',
         'precio',
+        'precio_oferta',
         'detalles',
         'sku',
     ];
@@ -24,6 +25,19 @@ class Camisetas extends Model
     {
         return [
             'precio' => 'integer',
+            'precio_oferta' => 'integer',
         ];
+    }
+
+    public function camisetaTallas()
+    {
+        return $this->hasMany(Camiseta_tallas::class, 'camiseta_id');
+    }
+
+    public function tallas()
+    {
+        return $this->belongsToMany(Tallas::class, 'camiseta_tallas', 'camiseta_id', 'talla_id')
+            ->withPivot('stock')
+            ->withTimestamps();
     }
 }

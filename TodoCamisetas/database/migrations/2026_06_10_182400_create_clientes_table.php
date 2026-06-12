@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tallas', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('camiseta_id')->constrained('camisetas')->cascadeOnDelete();
-            $table->string('talla');
+            $table->string('nombre_comercial');
+            $table->string('rut')->unique();
+            $table->string('direccion');
+            $table->string('categoria');
+            $table->string('contacto');
+            $table->unsignedInteger('procentaje_oferta')->default(0);
             $table->timestamps();
-            $table->unique(['camiseta_id', 'talla']);
         });
     }
 
@@ -25,6 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tallas');
+        Schema::dropIfExists('clientes');
     }
 };
+

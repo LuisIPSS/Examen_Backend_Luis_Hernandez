@@ -23,4 +23,9 @@ class Clientes extends Model
             'procentaje_oferta' => 'integer',
         ];
     }
+
+    public function ventas()
+    {
+        return $this->hasMany(Ventas::class, 'cliente_id');
+    }
 }

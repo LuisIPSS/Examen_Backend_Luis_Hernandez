@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('camisetas', function (Blueprint $table) {
             $table->id();
+            $table->string('titulo');
+            $table->string('club');
+            $table->string('pais');
+            $table->string('tipo');
+            $table->string('color');
+            $table->unsignedInteger('precio');
+            $table->unsignedInteger('precio_oferta')->nullable();
+            $table->text('detalles')->nullable();
+            $table->string('sku')->unique();
             $table->timestamps();
         });
     }
@@ -25,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('camisetas');
     }
 };
+
